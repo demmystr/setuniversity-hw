@@ -102,25 +102,25 @@
 | Category                     | Requirement                                                                                                                             | Importance | Difficulty |
 |------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|------------|------------|
 | **Availability**             | System should be available for learners and admins during business hours with minimal downtime.                                         | H          | M          |
-| **Availability**             | Critical workflows (SSO login, course search, booking) must remain available even under partial component failure.                      | H          | H          |
+|              | Critical workflows (SSO login, course search, booking) must remain available even under partial component failure.                      | H          | H          |
 | **Performance & Scalability** | Course search results should be returned within 2 seconds for 95% of queries under normal load.                                         | H          | M          |
-| **Performance & Scalability** | Booking creation (including validation and decision) should complete within 3 seconds for 95% of requests.                              | H          | M          |
-| **Performance & Scalability** | The system should scale to handle seasonal peaks without significant degradation.                                                       | H          | H          |
+|  | Booking creation (including validation and decision) should complete within 3 seconds for 95% of requests.                              | H          | M          |
+|  | The system should scale to handle seasonal peaks without significant degradation.                                                       | H          | H          |
 | **Security**                 | Users must authenticate via corporate SSO/IdP; no local passwords for employees.                                                        | H          | M          |
-| **Security**                 | All sensitive data in transit must use TLS; admin and vendor operations protected with strong access control.                           | H          | L          |
-| **Security**                 | Audit logs must capture all administrative/vendor changes to courses, rules, and bookings for at least N years.                         | H          | M          |
+|                  | All sensitive data in transit must use TLS; admin and vendor operations protected with strong access control.                           | H          | L          |
+|                  | Audit logs must capture all administrative/vendor changes to courses, rules, and bookings for at least N years.                         | H          | M          |
 | **Usability**                | Admins should create/update a course via a guided web form without technical support.                                                   | H          | M          |
-| **Usability**                | End-users should find/request a course within 3–4 clicks or <1 minute.                                                                   | H          | M          |
-| **Usability**                | Vendor users should manage opportunities with minimal LMS-specific training.                                                             | M          | M          |
+|                 | End-users should find/request a course within 3–4 clicks or <1 minute.                                                                   | H          | M          |
+|                 | Vendor users should manage opportunities with minimal LMS-specific training.                                                             | M          | M          |
 | **Modifiability & Extensibility** | Booking rules and validation logic should be configurable (not hard-coded).                                                            | H          | H          |
-| **Modifiability & Extensibility** | Notification channels should be pluggable with minimal impact on core flows.                                                         | M          | M          |
-| **Modifiability & Extensibility** | Adding a new vendor integration should not affect existing integrations.                                                             | M          | H          |
+|  | Notification channels should be pluggable with minimal impact on core flows.                                                         | M          | M          |
+|  | Adding a new vendor integration should not affect existing integrations.                                                             | M          | H          |
 | **Interoperability**         | Platform integrates with corporate SSO and email/SMS gateways.                                                                         | H          | M          |
-| **Interoperability**         | External training vendors should consume/expose standard APIs for opportunity synchronization.                                           | M          | H          |
+|          | External training vendors should consume/expose standard APIs for opportunity synchronization.                                           | M          | H          |
 | **Reliability & Consistency** | Revalidation after course rule changes must complete without inconsistent states.                                                       | H          | H          |
-| **Reliability & Consistency** | Notification sending must be resilient to transient failures (retry, DLQ).                                                              | M          | M          |
+|  | Notification sending must be resilient to transient failures (retry, DLQ).                                                              | M          | M          |
 | **Auditability & Compliance** | All changes to course definitions, rules, booking decisions must be traceable to user, timestamp, and reason.                           | H          | M          |
-| **Auditability & Compliance** | Compliance reports must be reproducible and trustworthy (no silent data loss).                                                          | H          | H          |
+|  | Compliance reports must be reproducible and trustworthy (no silent data loss).                                                          | H          | H          |
 
 
 ---
