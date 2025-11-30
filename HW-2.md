@@ -1,95 +1,25 @@
-# Capability Map
+# Capability Map – Learning Management System (LMS)
 
-## 1. Course Portfolio Management
-- **Course Catalog Manage**
-    - Course Define (title, description, type, vendor/internal, cost, language)
-    - Course Classify (tags, categories, security level)
-    - Course Version Control (draft, active, retired)
-    - Course Prioritize (set and update priority levels)
-- **Course Content Manage**
-    - Workshop Recording Store (video/audio/files)
-    - Course Material Attach (slides, documents, external links)
-    - Course Content Update (edit metadata and materials)
-- **Course Rule Configure**
-    - Booking Rule Define (eligibility, prerequisites, capacity)
-    - Validation Rule Define (priority-based acceptance rules)
-    - Revalidation Rule Configure (scope and triggers for re-checks)
-
-## 2. Booking & Enrollment Management
-- **Booking Request Capture**
-    - Course Booking Create (end-user self-service request)
-    - Booking Status Track (Proposed, Accepted, Rejected, Approved, etc.)
-- **Booking Validate & Decide**
-    - Booking Auto-Validate (priority & rule checks)
-    - Booking Auto-Accept / Auto-Reject (based on validation outcome)
-    - Booking Manual Review (administrator review & override)
-- **Enrollment Confirm**
-    - Enrollment Confirm (change status to Approved / Enrolled)
-    - Enrollment Cancel (user/admin initiated)
-
-## 3. User Access & Security Management
-- **User Authenticate**
-    - SSO Authenticate (corporate identity provider)
-    - Session Manage (timeout, re-login)
-- **User Authorize**
-    - Role & Permission Manage (learner, admin, vendor, auditor)
-    - Access Control Enforce (per-course, per-module, per-report)
-- **Security Control Enforce**
-    - Sensitive Data Protect (PII, security-course data)
-    - Audit Trail Capture (who changed what and when)
-
-## 4. Notification & Communication Management
-- **Notification Policy Manage**
-    - Notification Rule Configure (which event triggers which channel)
-    - Template Manage (email/SMS templates per event)
-- **Event-Based Notify**
-    - Admin Change Notify (course edit, vendor change, exceptions)
-    - Learner Status Notify (booking proposed/approved/rejected)
-    - Vendor Change Notify (opportunity added/updated/removed)
-- **Channel Integrate**
-    - Email Gateway Integrate
-    - SMS Gateway Integrate
-
-## 5. Third-Party Supplier Management
-- **Vendor Onboard & Profile Manage**
-    - Vendor Profile Maintain (contacts, branding, SLA)
-    - Vendor Access Govern (roles, permissions, SSO/federation if any)
-- **Vendor Opportunity Manage**
-    - Vendor Course Opportunity Create
-    - Vendor Course Opportunity Update
-    - Vendor Course Opportunity View & Track
-- **Vendor Collaboration Govern**
-    - Vendor Notification Manage (changes, approvals)
-    - Vendor Reporting Access (usage, attendance, revenue share)
-
-## 6. Search & Discovery Management
-- **Course Search Execute**
-    - Search By Criteria (topic, vendor, level, location, date, priority)
-    - Filter & Sort Results (date, popularity, relevance)
-- **Course Discover Support**
-    - Recommended Course Present (based on role, history – optional)
-    - Saved Search / Favorite Manage (optional capability)
-
-## 7. Reporting & Analytics Management
-- **Operational Reporting Provide**
-    - Booking Report Generate (per course, per user, per period)
-    - Usage Report Generate (attendance, completion, cancellations)
-    - Vendor Performance Report Generate (per vendor, per course)
-- **Regulatory & Compliance Reporting Provide**
-    - Security Training Compliance Report Generate
-    - Audit Log Report Generate (changes, approvals, access)
-- **Report Delivery Manage**
-    - Report Export (CSV, XLSX, PDF)
-    - Scheduled Report Deliver (email distribution – optional)
-
-## 8. Platform & Operations Management
-- **System Configuration Manage**
-    - Master Data Manage (categories, locations, business units)
-    - Localization & Time Zone Configure
-- **Operations & Support**
-    - Health Monitor & Alert (availability, errors)
-    - Backup & Restore Execute
-    - Environment Manage (test, pre-prod, prod)
+| Capability Level                         | Capability (Noun + Verb)           | Description                                                                                                      | Primary Stakeholders           |
+|------------------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Manage Courses                           | Capture Course Information         | Capture core course data (title, description, type, security flag, etc.) for internal and vendor courses.       | Admin, Suppliers               |
+| Manage Courses                           | Maintain Course Catalogue          | Create, update, and retire course records via a web form interface.                                             | Admin                          |
+| Manage Courses                           | Prioritize Courses                 | Assign and maintain course priority levels used in validation and booking rules.                                | Admin, Business Owners         |
+| Manage Courses                           | Revalidate Courses                 | Automatically revalidate non-paid course bookings against updated course rules and priorities.                  | System, Admin                  |
+| Manage Courses                           | Search Courses                     | Search and filter courses based on user-defined criteria (topic, supplier, priority, etc.).                     | Learners, Admin, Suppliers     |
+| Authenticate Users                       | Enforce SSO Authentication         | Enforce Single Sign-On for learners, administrators, and suppliers to access the system.                        | IT Security, All Users         |
+| Authenticate Users                       | Segment User Roles                 | Distinguish access and capabilities for learners, admins, and third-party suppliers.                            | Admin, IT Security             |
+| Manage Bookings                          | Capture Booking Requests           | Allow users to create course booking requests and assign them an initial “Proposed” status.                     | Learners                       |
+| Manage Bookings                          | Validate Booking Requests          | Validate booking requests against priority and booking rules; auto-accept or reject when possible.              | System, Admin                  |
+| Manage Bookings                          | Approve Booking Requests           | Enable administrators to review booking details and set final decision (Approved/Rejected).                     | Admin                          |
+| Manage Bookings                          | Track Booking Status               | Maintain and expose status history for each booking (Proposed, Accepted, Approved, Rejected, Paid, etc.).       | Learners, Admin                |
+| Manage Notifications                     | Notify Course Changes              | Send email/SMS notifications to administrators when a course is edited or rules change.                         | Admin                          |
+| Manage Notifications                     | Notify Booking Events              | Send email/SMS notifications to users on booking creation, validation, and status changes.                      | Learners, Admin                |
+| Manage Notifications                     | Notify Supplier Updates            | Notify suppliers and administrators when supplier opportunities are created or updated.                          | Suppliers, Admin               |
+| Manage Supplier Opportunities            | Maintain Supplier Catalogue        | Allow suppliers to view, add, and edit their course opportunities.                                              | Suppliers                      |
+| Manage Supplier Opportunities            | Govern Supplier Changes            | Apply business and approval rules on supplier-provided course changes where required.                           | Admin, Procurement             |
+| Report and Analyze Usage                 | Generate Operational Reports       | Generate detailed reports (bookings, vendors, usage) based on defined search criteria.                          | Admin, HR, Management          |
+| Report and Analyze Usage                 | Export Report Data                 | Allow stakeholders to view and download reports for further analysis and archiving.                             | Admin, HR, Management          |
 
 ---
 
