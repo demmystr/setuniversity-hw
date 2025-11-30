@@ -1,124 +1,127 @@
-# Capability Map – Learning Management System (LMS)
+# 1. Capability Map
 
-| Capability Level                         | Capability (Noun + Verb)           | Description                                                                                                      | Primary Stakeholders           |
-|------------------------------------------|------------------------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Manage Courses                           | Capture Course Information         | Capture core course data (title, description, type, security flag, etc.) for internal and vendor courses.       | Admin, Suppliers               |
-| Manage Courses                           | Maintain Course Catalogue          | Create, update, and retire course records via a web form interface.                                             | Admin                          |
-| Manage Courses                           | Prioritize Courses                 | Assign and maintain course priority levels used in validation and booking rules.                                | Admin, Business Owners         |
-| Manage Courses                           | Revalidate Courses                 | Automatically revalidate non-paid course bookings against updated course rules and priorities.                  | System, Admin                  |
-| Manage Courses                           | Search Courses                     | Search and filter courses based on user-defined criteria (topic, supplier, priority, etc.).                     | Learners, Admin, Suppliers     |
-| Authenticate Users                       | Enforce SSO Authentication         | Enforce Single Sign-On for learners, administrators, and suppliers to access the system.                        | IT Security, All Users         |
-| Authenticate Users                       | Segment User Roles                 | Distinguish access and capabilities for learners, admins, and third-party suppliers.                            | Admin, IT Security             |
-| Manage Bookings                          | Capture Booking Requests           | Allow users to create course booking requests and assign them an initial “Proposed” status.                     | Learners                       |
-| Manage Bookings                          | Validate Booking Requests          | Validate booking requests against priority and booking rules; auto-accept or reject when possible.              | System, Admin                  |
-| Manage Bookings                          | Approve Booking Requests           | Enable administrators to review booking details and set final decision (Approved/Rejected).                     | Admin                          |
-| Manage Bookings                          | Track Booking Status               | Maintain and expose status history for each booking (Proposed, Accepted, Approved, Rejected, Paid, etc.).       | Learners, Admin                |
-| Manage Notifications                     | Notify Course Changes              | Send email/SMS notifications to administrators when a course is edited or rules change.                         | Admin                          |
-| Manage Notifications                     | Notify Booking Events              | Send email/SMS notifications to users on booking creation, validation, and status changes.                      | Learners, Admin                |
-| Manage Notifications                     | Notify Supplier Updates            | Notify suppliers and administrators when supplier opportunities are created or updated.                          | Suppliers, Admin               |
-| Manage Supplier Opportunities            | Maintain Supplier Catalogue        | Allow suppliers to view, add, and edit their course opportunities.                                              | Suppliers                      |
-| Manage Supplier Opportunities            | Govern Supplier Changes            | Apply business and approval rules on supplier-provided course changes where required.                           | Admin, Procurement             |
-| Report and Analyze Usage                 | Generate Operational Reports       | Generate detailed reports (bookings, vendors, usage) based on defined search criteria.                          | Admin, HR, Management          |
-| Report and Analyze Usage                 | Export Report Data                 | Allow stakeholders to view and download reports for further analysis and archiving.                             | Admin, HR, Management          |
+### 1.1 Capability Map Table
 
----
-
-# Utility Tree
-
-> Legend per leaf node: **(Importance, Difficulty)** with values H/M/L.
-
-## Utility (Overall System Quality)
-
-| Category                     | Requirement                                                                                                                             | Importance | Difficulty |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|------------|------------|
-| **Availability**             | System should be available for learners and admins during business hours with minimal downtime.                                         | H          | M          |
-|              | Critical workflows (SSO login, course search, booking) must remain available even under partial component failure.                      | H          | H          |
-| **Performance & Scalability** | Course search results should be returned within 2 seconds for 95% of queries under normal load.                                         | H          | M          |
-|  | Booking creation (including validation and decision) should complete within 3 seconds for 95% of requests.                              | H          | M          |
-|  | The system should scale to handle seasonal peaks without significant degradation.                                                       | H          | H          |
-| **Security**                 | Users must authenticate via corporate SSO/IdP; no local passwords for employees.                                                        | H          | M          |
-|                  | All sensitive data in transit must use TLS; admin and vendor operations protected with strong access control.                           | H          | L          |
-|                  | Audit logs must capture all administrative/vendor changes to courses, rules, and bookings for at least N years.                         | H          | M          |
-| **Usability**                | Admins should create/update a course via a guided web form without technical support.                                                   | H          | M          |
-|                 | End-users should find/request a course within 3–4 clicks or <1 minute.                                                                   | H          | M          |
-|                 | Vendor users should manage opportunities with minimal LMS-specific training.                                                             | M          | M          |
-| **Modifiability & Extensibility** | Booking rules and validation logic should be configurable (not hard-coded).                                                            | H          | H          |
-|  | Notification channels should be pluggable with minimal impact on core flows.                                                         | M          | M          |
-|  | Adding a new vendor integration should not affect existing integrations.                                                             | M          | H          |
-| **Interoperability**         | Platform integrates with corporate SSO and email/SMS gateways.                                                                         | H          | M          |
-|          | External training vendors should consume/expose standard APIs for opportunity synchronization.                                           | M          | H          |
-| **Reliability & Consistency** | Revalidation after course rule changes must complete without inconsistent states.                                                       | H          | H          |
-|  | Notification sending must be resilient to transient failures (retry, DLQ).                                                              | M          | M          |
-| **Auditability & Compliance** | All changes to course definitions, rules, booking decisions must be traceable to user, timestamp, and reason.                           | H          | M          |
-|  | Compliance reports must be reproducible and trustworthy (no silent data loss).                                                          | H          | H          |
-
+| Capability Level | Capability                           | Description                                                                                               |
+|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| L1               | Manage Courses                       | End-to-end management of internal, vendor and security courses throughout their lifecycle.                |
+| L2               | Record Internal Courses              | Capture and store recordings of internal workshops and courses.                                           |
+| L2               | Maintain Course Catalog              | Create, update, deactivate and version course definitions and metadata.                                   |
+| L2               | Assign Course Priority               | Set and modify course priority levels to influence validation and booking rules.                          |
+| L2               | Revalidate Courses                   | Re-run validation rules on all non-paid courses after catalog changes.                                   |
+| L2               | Notify Course Stakeholders           | Send notifications (email/SMS) to admins and learners on course changes.                                  |
+| L1               | Manage Course Bookings               | Support end-user booking requests, validation and approval workflows.                                     |
+| L2               | Capture Booking Requests             | Let users request/book courses and assign initial “Proposed” status.                                      |
+| L2               | Validate Booking Requests            | Automatically validate requests against booking rules and course priority.                                |
+| L2               | Decide Booking Outcome               | Automatically accept or reject bookings based on validation results.                                      |
+| L2               | Approve Bookings Manually            | Allow administrators to review details and change status to “Approved”.                                   |
+| L2               | Notify Booking Stakeholders          | Inform users and admins about booking status changes via email/SMS.                                       |
+| L1               | Authenticate and Authorize Users     | Control access to LMS features for learners, admins, and vendors.                                         |
+| L2               | Authenticate Users via SSO           | Integrate with corporate SSO for user login; avoid local password storage.                                |
+| L2               | Authorize Roles and Permissions      | Enforce role-based access control for admin, vendor, and audit functions.                                 |
+| L1               | Integrate Third-Party Suppliers      | Enable external training vendors to manage their course opportunities.                                    |
+| L2               | Manage Supplier Opportunities        | Allow suppliers to create, edit, and retire their course offerings.                                       |
+| L2               | Notify Supplier Changes              | Inform suppliers and administrators of changes in opportunities.                                          |
+| L1               | Search Courses                       | Provide flexible search capabilities over the course and booking catalog.                                 |
+| L2               | Search Course Catalog                | Filter and search courses by attributes (type, priority, vendor, dates, etc.).                            |
+| L2               | Search Bookings                      | Filter and search bookings for users and admins by defined criteria.                                      |
+| L1               | Report on Learning Activities        | Provide stakeholders with analytical and operational reports.                                             |
+| L2               | Report on Bookings                   | Generate and download reports about booking volumes and statuses.                                         |
+| L2               | Report on Vendors                    | Generate and download reports on vendor performance and course usage.                                     |
+| L2               | Report on System Usage               | Provide usage statistics across users, courses and suppliers.                                             |
+| L1               | Operate and Monitor LMS Platform     | Run, monitor and support the LMS in production (implicit but required).                                   |
+| L2               | Monitor System Health                | Track availability, errors, and performance metrics for LMS components.                                   |
+| L2               | Manage Configuration and Rules       | Maintain business rules for validation, priority, notifications and integrations.                         |
 
 ---
 
-# Architecture Significant Requirements (ASR)
+# 2. Utility Tree
 
-> These requirements have major impact on architecture, technology choices, and structure.
+### 2.1 Utility Tree (Quality Attributes and Scenarios)
 
-1. **SSO-Centric Authentication**
-    - The system must authenticate all internal users (learners, admins) using corporate SSO (e.g., SAML/OIDC) and rely on central identity attributes (roles, departments, groups).
-2. **Role-Based Access Control**
-    - The system must support multiple personas (learner, admin, vendor, auditor) with clear separation of permissions and least-privilege access.
-3. **Configurable Booking & Validation Engine**
-    - Booking validation, prioritization, and auto-accept/reject logic must be externalized into configurable rules (e.g., rule engine, configuration store) rather than scattered in application code.
-4. **Course Change Revalidation Mechanism**
-    - Any change to course rules or priority must trigger revalidation of all affected non-paid bookings in a controlled, scalable way (e.g., background jobs, batch processing, idempotent updates).
-5. **Event-Driven Notifications**
-    - Key lifecycle events (course updated, booking proposed/accepted/rejected/approved, vendor opportunity updated) must publish events to a notification subsystem that dispatches email/SMS in a decoupled manner.
-6. **Vendor Self-Service Portal**
-    - Vendors must have a secure self-service interface (UI or API) to create, update, and manage their course opportunities, isolated from internal administration areas.
-7. **Search & Filtering Across Course Catalog**
-    - The system must provide flexible search with multi-criteria filtering across internal and vendor courses while remaining performant on large catalogs.
-8. **Reporting & Data Warehouse Alignment**
-    - The system must provide structured reporting (booking, usage, vendor performance, compliance) that can be exported or integrated into corporate reporting/BI platforms.
-9. **Audit Trail for Business-Critical Operations**
-    - All create/update/delete operations on courses, rules, approvals, and vendor opportunities must be fully auditable (who, when, before/after state).
-10. **Scalable Architecture for Campaign Peaks**
-    - The architecture must handle load peaks (e.g., mandatory security trainings) without significant rework—supporting horizontal scaling or efficient queueing where applicable.
-11. **Separation of Concerns per Domain**
-    - Core domains (Course Management, Booking, Vendor Management, Notification, Reporting) should be modularized (e.g., services/modules) to allow independent evolution and deployment.
-12. **Resilient Integration with External Gateways**
-    - Email/SMS and vendor integrations must tolerate temporary outages (retry, backoff, dead-letter handling) without data loss or inconsistent business states.
+Legend: **(Importance, Difficulty/Risk)** — H/M/L.
 
----
+## Security
+- Enforce SSO-only authentication for all internal users; no local password storage. **(H, M)**
+- Ensure all external communication uses TLS with strong ciphers. **(H, L)**
+- Provide fine-grained, role-based authorization for admin, vendor, and audit functions. **(H, M)**
+- Log and audit all security-relevant actions (auth, role changes, booking approval decisions). **(H, M)**
 
-# Quality Attribute Requirements (Selected)
+## Performance
+- Course search returns results ≤ 2s for 95% of requests for up to N courses. **(H, M)**
+- Booking validation and decision complete ≤ 3s for 95% of requests. **(H, M)**
+- Reports generated/down­loaded ≤ 10s for 90% of requests. **(M, M)**
 
-> Structured as [ID] – *Attribute* – Description (Importance, Difficulty).
+## Availability & Reliability
+- 99.5% uptime for core functions during business hours. **(H, H)**
+- No booking or course changes lost during transient failures of external systems. **(H, M)**
+- Recover from service failure with no data loss; max manual failover ≤ 30 min. **(M, M)**
 
-| ID             | Category        | Requirement Description                                                                                                                                           | Importance | Difficulty |
-|----------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|------------|
-| QA-SEC-01      | Security         | Internal users must authenticate via corporate SSO; LMS must not store employee passwords locally.                                                               | H          | M          |
-| QA-SEC-02      | Security         | Access to admin, vendor, and audit functions must be restricted to specific roles and permissions, configurable per organization policy.                        | H          | M          |
-| QA-SEC-03      | Security         | All external communication must use TLS with modern protocols and ciphers.                                                                                       | H          | L          |
-| QA-PERF-01     | Performance      | 95% of course search requests must complete within 2 seconds under normal load.                                                                                  | H          | M          |
-| QA-PERF-02     | Performance      | Booking creation (incl. validation & decision) must complete within 3 seconds for 95% of requests.                                                               | H          | M          |
-| QA-AVAIL-01    | Availability     | SSO login, search, and booking creation must achieve 99.x% availability (SLA TBD).                                                                               | H          | M          |
-| QA-MOD-01      | Modifiability    | Changing booking/priority rules should not affect more than one module and should not require DB schema migration in typical cases.                               | H          | H          |
-| QA-MOD-02      | Modifiability    | Onboarding a new vendor using an existing pattern should not require downtime and must not affect other vendor integrations.                                      | M          | H          |
-| QA-REL-01      | Reliability      | Revalidation jobs must be restartable and idempotent to avoid inconsistent booking states or duplicate notifications.                                             | H          | H          |
-| QA-AUD-01      | Auditability     | All changes to courses, rules, approvals, and vendor opportunities must be logged with user ID, timestamp, and old/new values.                                   | H          | M          |
-| QA-REP-01      | Reporting        | Compliance reports must rely on immutable completion records and be reproducible for any date range.                                                             | H          | H          |
-| QA-USAB-01     | Usability        | Admins should be able to create/update a course in a single workflow with limited steps (to be refined during UX design).                                        | H          | M          |
+## Usability
+- Admin can create/update a course in ≤ 5 minutes. **(H, L)**
+- End-user booking submission in ≤ 3 steps. **(M, M)**
+- Clear, localized messages for validation/approval outcomes. **(M, L)**
+
+## Modifiability
+- Validation and booking rules must be configurable without code changes. **(H, H)**
+- Onboard new vendor integration in ≤ 5 person-days. **(M, H)**
+- Add new notification channels with minimal changes. **(M, M)**
+
+## Interoperability & Integration
+- Support SSO integrations via standard protocols (SAML/OIDC). **(H, M)**
+- Integrate with at least one email/SMS gateway. **(H, M)**
+- Integrate with at least one external vendor API. **(M, H)**
+
+## Auditability & Reporting
+- Provide audit trails exportable for compliance. **(H, M)**
+- Provide parameterized operational reports. **(M, M)**
 
 ---
 
-# Constraints
+# 3. Architecture Significant Requirements (ASR), Quality Attributes, Constraints
 
-> Constraints are external limitations or design boundaries that the solution must respect; they are not simple copies of functional requirements.
+## 3.1 ASR (Architecture Significant Requirements)
 
-| ID      | Constraint Title                      | Description                                                                                                                                                 |
-|---------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| C-001   | Corporate Identity Provider            | The LMS must integrate with the organization’s existing identity provider for SSO (e.g., SAML/OIDC) and cannot introduce a parallel identity store.        |
-| C-002   | Standard Communication Channels        | The LMS must use existing corporate email and SMS gateways; introducing new messaging providers requires security and procurement approval.                |
-| C-003   | Technology & Hosting Standards         | The solution must comply with the organization’s hosting model (cloud/on-prem/hybrid) and follow standard tech stacks and IT operational practices.        |
-| C-004   | Security & Compliance Policies         | The LMS must comply with corporate security policies and applicable regulations, including retention and access control rules for training/user data.       |
-| C-005   | Data Residency & Retention             | Training, booking, and audit data must be stored in approved regions and retained for a compliance-defined minimum period (e.g., N years).                 |
-| C-006   | Integration Protocols                  | Integrations with external vendors/gateways must use approved protocols (HTTPS REST, secure file transfer). Direct DB-level integration is prohibited.    |
-| C-007   | Change Management & Release Process    | Deployment of LMS changes (including configuration affecting rules and validation) must comply with the organization’s change management process (release windows, approvals, rollback strategy)|
-| C-008   | Licensing & Cost Constraints           | Selected platform components (DB, messaging, rule engine, reporting tools) must fit within existing license agreements or approved budget; non-approved commercial components are not allowed.|
+| ID          | Category      | ASR                                                                                                      | Rationale                                                                                   |
+|-------------|---------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| ASR-SEC-01  | Security      | Enforce SSO-only authentication; no local password storage.                                              | Determines identity protocol, session handling, integration components.                     |
+| ASR-SEC-02  | Security      | All communication must use TLS with strong cipher suites.                                                | Influences infrastructure, API gateways, deployment.                                        |
+| ASR-SEC-03  | Security      | Must support fine-grained role-based authorization.                                                      | Impacts API design, domain model, permission system.                                        |
+| ASR-PERF-01 | Performance   | Course search ≤ 2s for 95% of requests.                                                                  | Drives DB indexing, caching, possible search engine choice.                                 |
+| ASR-PERF-02 | Performance   | Booking validation completed ≤ 3s for 95% of requests.                                                   | Impacts workflow design (sync/async), rule evaluation engine.                               |
+| ASR-AVAIL-01| Availability  | Core LMS uptime must be ≥ 99.5% during business hours.                                                   | Drives redundancy, cluster setup, monitoring.                                               |
+| ASR-MOD-01  | Modifiability | Business rules must be modifiable without code change.                                                   | Impacts rules engine/DSL, dynamic configuration subsystem.                                  |
+| ASR-INTEG-01| Integration   | Must integrate with corporate SSO and notification gateway.                                              | Determines boundary services and integration patterns.                                      |
+| ASR-AUD-01  | Auditability  | Must provide auditable logs for course changes, booking decisions, approvals.                            | Requires structured logging, audit storage, retention policy.                               |
+
+---
+
+## 3.2 Quality Attribute Requirements
+
+| ID          | Quality Attribute | Requirement                                                                                          |
+|-------------|-------------------|------------------------------------------------------------------------------------------------------|
+| QA-SEC-01   | Security          | Only authenticated users may access LMS; role-based access required.                                |
+| QA-SEC-02   | Security          | Security events must be timestamped and logged.                                                     |
+| QA-PERF-01  | Performance       | Report generation ≤ 10s for typical periods.                                                        |
+| QA-AVAIL-01 | Availability      | No loss of booking or course changes during external system failures.                              |
+| QA-USAB-01  | Usability         | Admin can create/update a course within 5 minutes.                                                  |
+| QA-USAB-02  | Usability         | Booking submission in ≤ 3 steps.                                                                    |
+| QA-MOD-01   | Modifiability     | Adding new course attributes requires minimal DB/UI changes.                                        |
+| QA-INTEG-01 | Interoperability  | System supports multiple notification channels.                                                     |
+| QA-REP-01   | Auditability      | Audit logs must be exportable.                                                                      |
+
+---
+
+## 3.3 Constraints
+
+| ID          | Type            | Constraint                                                                                                         | Source |
+|-------------|-----------------|---------------------------------------------------------------------------------------------------------------------|--------|
+| CON-BUS-01  | Business        | LMS must support internal, security and vendor courses in a single platform.                                       | Business |
+| CON-BUS-02  | Business        | System must send notifications via SMS/email.                                                                      | Stakeholders |
+| CON-ORG-01  | Organizational  | Must integrate with corporate SSO; new IdP cannot be introduced.                                                   | IT/Security |
+| CON-ORG-02  | Organizational  | Must comply with corporate logging and audit policies.                                                             | Compliance |
+| CON-TECH-01 | Technical       | Must run within existing corporate infrastructure (cloud/on-prem as defined).                                      | Enterprise Architecture |
+| CON-TECH-02 | Technical       | Must use standard SSO protocols and secure transport.                                                              | Architecture Policy |
+| CON-TECH-03 | Technical       | Integrations must use external vendors’ existing APIs.                                                             | Vendors |
+| CON-OPS-01  | Operational     | Must support monitoring/logging with existing operational tools.                                                   | DevOps |
 
