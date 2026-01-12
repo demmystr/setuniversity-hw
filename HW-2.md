@@ -47,63 +47,6 @@ This document defines the capability map, utility tree, architecturally signific
       Manage Configuration and Rules
 ```
 
-
-Capabilities are expressed from a **product perspective**, not as implementation features.  
-L1 — top-level business capabilities; L2 — supporting sub-capabilities.
-
-### 1.1 Capability Map Table
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Manage Courses** | End-to-end lifecycle management of internal, vendor and security courses. |
-| L2 | Record Internal Courses | Capture, store and access recordings of internal workshops and courses. |
-| L2 | Maintain Course Catalog | Create, update, deactivate and version course definitions and metadata. |
-| L2 | Assign Course Priority | Set and modify priority levels to influence validation and booking logic. |
-| L2 | Revalidate Courses | Re-run validation rules on non-paid courses after catalog changes. |
-| L2 | Notify Course Stakeholders | Send notifications (email/SMS) to learners and administrators. |
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Manage Course Bookings** | Manage booking requests, automated decisions, and approval workflows. |
-| L2 | Capture Booking Requests | Users submit booking requests; system assigns "Proposed" status. |
-| L2 | Validate Booking Requests | Automatic validation based on rules, course priority, and constraints. |
-| L2 | Decide Booking Outcomes | Automated acceptance or rejection of booking requests. |
-| L2 | Approve Bookings Manually | Administrators review details and approve valid bookings. |
-| L2 | Notify Booking Stakeholders | Notify learners and admins about booking status changes. |
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Authenticate and Authorize Users** | Provide secure access and enforce permission controls. |
-| L2 | Authenticate Users via SSO | Authenticate via corporate identity provider using standardized protocols. |
-| L2 | Authorize Roles and Permissions | Enforce role-based permissions for learner, admin, vendor, and auditor roles. |
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Integrate Third-Party Suppliers** | Enable vendors to manage and offer their course opportunities. |
-| L2 | Manage Supplier Opportunities | Vendors create, edit, update and retire course opportunities. |
-| L2 | Notify Supplier Changes | Notify suppliers and admins of opportunity updates. |
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Search Courses** | Provide search and filtering across courses and bookings. |
-| L2 | Search Course Catalog | Search internal and vendor course catalog using flexible filters. |
-| L2 | Search Bookings | Search and filter bookings for users and administrators. |
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Reporting and Analytics** | Provide operational, vendor, usage, and booking reports. |
-| L2 | Report on Bookings | Export and view booking performance and statuses. |
-| L2 | Report on Vendors | Export and view vendor usage and course performance. |
-| L2 | Report on System Usage | Provide metrics on system usage by role, user and time period. |
-
-| Capability Level | Capability                           | Description                                                                                               |
-|------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **L1** | **Operate and Monitor LMS Platform** | Ensure reliable and observable LMS operations. |
-| L2 | Monitor System Health | Track availability, performance and failures. |
-| L2 | Manage Configuration and Rules | Maintain rules for validation, notifications, priorities and integrations. |
-
-
-
 ---
 
 # 2. Utility Tree
@@ -112,42 +55,45 @@ Legend: (Importance, Difficulty/Risk) — H/M/L
 Each scenario represents a **quality attribute** that is relevant to architectural decisions.
 
 ## 2.1 Utility Tree
+```mermaid
+mindmap
+  root((Utility Tree))
 
-### **Security**
-- LMS must rely on corporate IdP using SAML/OIDC for authentication; no local password storage. **(H, M)**
-- All external communication must use TLS with strong and updated cipher suites. **(H, L)**
-- Role-based access control must protect admin, vendor and audit functions. **(H, M)**
-- Security-relevant events (auth failures, permission denials) must be logged centrally. **(H, M)**
+    Security
+      Corporate IdP via SAML/OIDC H,M
+      TLS for all external communication H,L
+      Role-based access control H,M
+      Centralized security event logging H,M
 
-### **Performance**
-- Course search must return results within ≤2 seconds for 95% of requests under normal load. **(H, M)**
-- Booking validation and decision must complete within ≤3 seconds for 95% of requests. **(H, M)**
-- Reports must generate and download within ≤10 seconds for 90% of typical use cases. **(M, M)**
+    Performance
+      Course search ≤2s 95% H,M
+      Booking decision ≤3s 95% H,M
+      Reports ≤10s 90% M,M
 
-### **Availability & Reliability**
-- Core LMS functions must maintain ≥99.5% uptime during business hours. **(H, H)**
-- No booking or course changes may be lost even when external services are temporarily unavailable. **(H, M)**
-- LMS must recover from node/service failure without data loss; manual failover ≤30 minutes. **(M, M)**
+    Availability & Reliability
+      ≥99.5% uptime H,H
+      No data loss on external failure H,M
+      Failover ≤30 min without data loss M,M
 
-### **Usability**
-- Admin must be able to create or update a course in ≤5 minutes after basic training. **(H, L)**
-- Booking submission must require ≤3 steps from search to confirmation. **(M, M)**
-- System must provide clear, localized error, validation, and status feedback. **(M, L)**
+    Usability
+      Admin course setup ≤5 min H,L
+      Booking ≤3 steps M,M
+      Clear localized feedback M,L
 
-### **Modifiability**
-- Validation and booking rules must be editable without code changes (config or rule engine). **(H, H)**
-- New vendor integration based on standard interface must require ≤5 person-days. **(M, H)**
-- New notification channels must be pluggable with minimal impact on existing code. **(M, M)**
+    Modifiability
+      Rules editable without code changes H,H
+      New vendor integration ≤5 days M,H
+      Pluggable notification channels M,M
 
-### **Interoperability & Integration**
-- LMS must integrate with corporate SSO following standard protocols (SAML/OIDC). **(H, M)**
-- LMS must support at least one email/SMS gateway for notifications. **(H, M)**
-- LMS must integrate with at least one external vendor API using stable interface. **(M, H)**
+    Interoperability & Integration
+      Corporate SSO integration H,M
+      Email/SMS gateway support H,M
+      External vendor API integration M,H
 
-### **Auditability**
-- Audit logs must be exportable in a standardized, machine-readable format. **(H, M)**
-- Parameterized operational reports must be available for authorized users. **(M, M)**
-
+    Auditability
+      Exportable audit logs H,M
+      Parameterized operational reports M,M
+```
 ---
 
 # 3. Architecturally Significant Requirements (ASRs), QA Requirements, and Constraints
