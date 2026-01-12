@@ -7,6 +7,47 @@ This document defines the capability map, utility tree, architecturally signific
 
 # 1. Capability Map
 
+```mermaid
+  mindmap
+  root((LMS Capability Map))
+
+    Manage Courses
+      Record Internal Courses
+      Maintain Course Catalog
+      Assign Course Priority
+      Revalidate Courses
+      Notify Course Stakeholders
+
+    Manage Course Bookings
+      Capture Booking Requests
+      Validate Booking Requests
+      Decide Booking Outcomes
+      Approve Bookings Manually
+      Notify Booking Stakeholders
+
+    Authenticate and Authorize Users
+      Authenticate Users via SSO
+      Authorize Roles and Permissions
+
+    Integrate Third-Party Suppliers
+      Manage Supplier Opportunities
+      Notify Supplier Changes
+
+    Search Courses
+      Search Course Catalog
+      Search Bookings
+
+    Reporting and Analytics
+      Report on Bookings
+      Report on Vendors
+      Report on System Usage
+
+    Operate and Monitor LMS Platform
+      Monitor System Health
+      Manage Configuration and Rules
+```
+
+
 Capabilities are expressed from a **product perspective**, not as implementation features.  
 L1 — top-level business capabilities; L2 — supporting sub-capabilities.
 
@@ -60,6 +101,8 @@ L1 — top-level business capabilities; L2 — supporting sub-capabilities.
 | **L1** | **Operate and Monitor LMS Platform** | Ensure reliable and observable LMS operations. |
 | L2 | Monitor System Health | Track availability, performance and failures. |
 | L2 | Manage Configuration and Rules | Maintain rules for validation, notifications, priorities and integrations. |
+
+
 
 ---
 
